@@ -1,0 +1,282 @@
+# Array Practice Questions
+
+## 1. Sum of Array
+Input:
+5
+1 2 3 4 5
+
+Expected Output:
+Sum = 15
+
+---
+
+## 2. Largest Element
+Input:
+5
+10 40 20 80 30
+
+Expected Output:
+Largest = 80
+
+---
+
+## 3. Smallest Element
+Input:
+5
+10 40 20 80 30
+
+Expected Output:
+Smallest = 10
+
+---
+
+## 4. Linear Search
+Input:
+5
+10 20 30 40 50
+30
+
+Expected Output:
+Element found at index 2
+
+---
+
+## 5. Reverse Array
+Input:
+5
+1 2 3 4 5
+
+Expected Output:
+5 4 3 2 1
+
+---
+
+## 6. Check Sorted Array
+Input:
+5
+1 2 3 4 5
+
+Expected Output:
+Sorted
+
+---
+
+## 7. Second Largest Element
+Input:
+5
+10 50 20 80 30
+
+Expected Output:
+Second Largest = 50
+
+---
+
+## 8. Frequency Count
+Input:
+5
+1 2 2 3 1
+
+Expected Output:
+1 -> 2
+2 -> 2
+3 -> 1
+
+---
+
+## 9. Move All Zeros to End
+Input:
+7
+1 0 2 0 3 4 0
+
+Expected Output:
+1 2 3 4 0 0 0
+
+---
+
+## 10. Remove Duplicates from Sorted Array
+Input:
+7
+1 1 2 2 3 3 4
+
+Expected Output:
+1 2 3 4
+
+---
+
+## 11. Rotate Array by K
+Input:
+5
+1 2 3 4 5
+2
+
+Expected Output:
+4 5 1 2 3
+
+---
+
+## 12. Prefix Sum
+Input:
+5
+1 2 3 4 5
+
+Expected Output:
+1 3 6 10 15
+
+---
+
+## 13. Range Sum Query
+Input:
+5
+1 2 3 4 5
+1 3
+
+Expected Output:
+Range Sum = 9
+
+---
+
+## 14. Maximum Sum of K Consecutive Elements
+Input:
+6
+1 8 30 -5 20 7
+3
+
+Expected Output:
+Maximum Sum = 45
+
+---
+
+## 15. Stock Buy and Sell - One Transaction
+Input:
+6
+7 1 5 3 6 4
+
+Expected Output:
+Maximum Profit = 5
+
+---
+
+## 16. Stock Buy and Sell - Multiple Transactions
+Input:
+6
+7 1 5 3 6 4
+
+Expected Output:
+Maximum Profit = 7
+
+---
+
+## 17. Leaders in Array
+Input:
+6
+16 17 4 3 5 2
+
+Expected Output:
+17 5 2
+
+---
+
+## 18. Two Sum
+Input:
+4
+2 7 11 15
+9
+
+Expected Output:
+Indices = 0 1
+---------------------------------- TIME AND SPACE COMPLEXCITY OF ARRAY PROBLEMS 
+Day 1
+Sum of Array
+Pattern: Traversal
+TC: O(n)
+SC: O(1)
+Largest Element
+Pattern: Keep Best So Far
+TC: O(n)
+SC: O(1)
+Smallest Element
+Pattern: Keep Minimum So Far
+TC: O(n)
+SC: O(1)
+Day 2
+Linear Search
+Pattern: Traversal/Search
+TC: O(n)
+SC: O(1)
+Reverse Array
+Pattern: Two Pointers
+TC: O(n)
+SC: O(1)
+Check Sorted Array
+Pattern: Adjacent Comparison
+TC: O(n)
+SC: O(1)
+Second Largest Element
+Pattern: Keep Largest + Second Largest
+TC: O(n)
+SC: O(1)
+Intermediate Arrays
+Selection Sort
+Pattern: Find Minimum and Swap
+TC: O(n²)
+SC: O(1)
+Frequency Count
+Pattern: Nested Loop Counting
+TC: O(n²)
+SC: O(1)
+Remove Duplicates from Sorted Array
+Pattern: Two Pointers
+TC: O(n)
+SC: O(1)
+Move All Zeros to End
+Pattern: Two Pointers / Stable Partition
+TC: O(n)
+SC: O(1)
+Rotate Array by K
+Pattern: Index Mapping
+TC: O(n)
+SC: O(n)
+Prefix Sum & Sliding Window
+Prefix Sum
+Pattern: Preprocessing
+TC: O(n)
+SC: O(n)
+Maximum Sum of K Consecutive Elements
+Pattern: Sliding Window
+TC: O(n)
+SC: O(1)
+Advanced Array Patterns
+Stock Buy and Sell (One Transaction)
+Pattern: Track Minimum So Far
+TC: O(n)
+SC: O(1)
+Stock Buy and Sell (Multiple Transactions)
+Pattern: Greedy
+TC: O(n)
+SC: O(1)
+Leaders in Array
+Pattern: Right-to-Left Traversal
+TC: O(n)
+SC: O(1)
+Two Sum
+Brute Force:
+TC: O(n²)
+SC: O(1)
+Hash Map:
+TC: O(n)
+SC: O(n)
+Not Fully Completed Yet
+Kadane's Algorithm (Maximum Subarray Sum)
+Pattern: Dynamic Programming / Running Sum
+TC: O(n)
+SC: O(1)
+Majority Element
+Pattern: Boyer-Moore Voting
+TC: O(n)
+SC: O(1)
+
+## Pending
+- Kadane's Algorithm
+- Majority Element
+- Bubble Sort
+- Insertion Sort
