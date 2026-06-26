@@ -2,6 +2,7 @@
 using namespace std;
 void duplicates(int arr[],int n){
     if(n == 0)return ;
+
     int res=1;
     for(int i=1;i<n;i++){
         if(arr[i]!=arr[res-1]){
@@ -9,6 +10,7 @@ void duplicates(int arr[],int n){
             res++;
         }
     }
+
     int count=0;
     for(int i=0;i<res;i++){
         cout<<arr[i]<<" ";
@@ -18,6 +20,10 @@ void duplicates(int arr[],int n){
     }
     cout<<"count"<<count;
 
+
+    for(int i=0;i<res;i++){
+        cout<<arr[i]<<" ";
+    }
    
 }
 int main(){
