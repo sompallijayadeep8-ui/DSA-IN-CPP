@@ -1,0 +1,750 @@
+HASHING (PRESTORE/FETCHING)
+What is Hashing?
+One-line definition
+
+Hashing is a technique for storing information so that it can be searched extremely quickly.
+
+Hashing is used to store and retrieve data efficiently.
+ Instead of searching the entire array every time (O(n)), 
+we preprocess the data once and then answer queries in O(1) average time using a hash table. 
+This avoids repeatedly traversing the array.
+
+
+
+
+Hashing
+
+Stored useful information.
+
+Example:
+
+Number -> Frequency
+
+Character -> Frequency
+
+Number -> Index
+
+Reason:
+
+Avoid searching again.
+
+
+Prefix Sum
+
+Stored:
+
+Prefix Sum
+
+Reason:
+
+Avoid recalculating subarray sums.
+
+Sliding Window
+
+Stores:
+
+Current Window
+
+Reason:
+
+Avoid recalculating overlapping elements.
+
+Notice something?
+
+Every topic is about not repeating work.
+
+Topic	What is reused?
+Hashing	Previous information
+Prefix Sum	Previous cumulative sum
+Sliding Window	Previous window
+
+This is why I wanted to compare topics—you start seeing the underlying idea instead of memorizing techniques.
+
+
+
+Without hashing:
+Query
+↓
+Search entire array
+↓
+O(n)
+
+With hashing:
+Preprocess once
+↓
+Store frequencies/values
+↓
+Direct lookup
+↓
+O(1) average
+
+Hashing
+│
+├── Frequency Count ✅
+├── Count Distinct ✅
+├── Highest Frequency
+├── Lowest Frequency
+├── Contains Duplicate
+├── Two Sum
+├── Contains Duplicate II
+├── Intersection I
+├── Intersection II
+├── Longest Consecutive Sequence
+├── Valid Anagram
+├── Group Anagrams
+├── Prefix Sum + Hashing
+│     ├── Subarray Sum K
+│     ├── Longest Subarray K
+│     └── Count Subarrays
+├── Sliding Window + Hashing
+│     ├── Longest Substring
+│     ├── Minimum Window
+│     └── Find All Anagrams
+└── Advanced Hashing
+
+
+Why unordered_set instead of set?
+
+A good answer is:
+
+We don't need the elements in sorted order.
+ We only need fast lookup to check whether an element 
+ has already been seen.
+ unordered_set provides O(1) average insertion and lookup,
+ while set takes O(log n), so unordered_set is a better fit.
+
+
+
+  THINK IN THIS WAY:
+ | Requirement         | Data Structure                    |
+| ------------------- | --------------------------------- |
+| Need sorted order   | `set` / `map`                     |
+| Need fastest lookup | `unordered_set` / `unordered_map` |
+| Need frequency      | `unordered_map`                   |
+| Need only existence | `unordered_set`          
+
+
+ 🧠 Golden Rule
+
+Whenever you see:
+
+unordered_map<A,B>
+
+Ask yourself:
+
+What should my key represent?
+
+What should my value represent?   
+
+ Question:
+Need Frequency?
+→ unordered_map<value, frequency>
+
+Need Index?
+→ unordered_map<value, index>
+
+Need Existence?
+→ unordered_set
+
+Need Sorted?
+→ map / set    |
+
+
+two sum:
+If I were interviewing you, I'd ask:
+
+Why didn't you sort the array?
+
+Expected answer:
+
+Because sorting changes the original indices. The problem asks us to return the original indices, so hashing is a better fit.
+
+Need frequency?
+↓
+unordered_map
+
+
+Need existence?
+↓
+unordered_set
+
+Need sorted?
+↓
+
+map/set
+
+
+arr.find(boom)!=arr.end();
+
+find(key)
+    ↓
+Checks existence only
+(Never changes the map)
+
+mpp[key]
+    ↓
+Accesses the value
+If the key doesn't exist,
+it creates a new entry.
+
+
+
+Step 1 — Understand
+
+Step 2 — Pattern Recognition
+
+Step 2.5 — Why was this pattern invented? ⭐
+
+Step 3 — Brute Force
+
+Step 4 — Dry Run
+
+Step 5 — Code Skeleton
+
+Step 6 — Full Code
+
+Step 7 — Complexity
+
+Step 8 — Interview Discussion
+
+Step 9 — Optimizations
+
+
+
+HASHING PATTERNS
+
+1. Frequency
+   Store: value → count
+   Problems:
+   - Valid Anagram
+   - Top K Frequent
+   - ...
+
+2. Lookup
+   Store: value
+   Problems:
+   - Contains Duplicate
+   - ...
+
+3. Index Mapping
+   Store: value → index
+   Problems:
+   - Two Sum
+   - Contains Duplicate II
+
+4. Character Mapping
+   Store: char → char
+   Problems:
+   - Isomorphic Strings
+
+5. Grouping
+   Store: signature → group
+   Problems:
+   - Group Anagrams
+
+6. Frequency Bucketing
+   Store: frequency → list of values
+   Problems:
+   - Top K Frequent (O(n))
+
+  # Sliding Window Notes
+
+## 1. Maximum Sum Subarray of Size K
+Pattern: Fixed Sliding Window
+
+Input:
+nums = [2,1,5,1,3,2]
+k = 3
+
+Output:
+9
+
+Store:
+- windowSum
+- maxSum
+
+Key Idea:
+- Build first window
+- Remove old element
+- Add new element
+- Update maximum
+
+------------------------------------------------------------
+
+## 2. Maximum Average Subarray I (LC 643)
+Pattern: Fixed Sliding Window
+
+Input:
+nums = [1,12,-5,-6,50,3]
+k = 4
+
+Output:
+12.75
+
+Store:
+- windowSum
+- maxSum
+
+Key Idea:
+- Same as Maximum Sum
+- Return maxSum / k
+
+------------------------------------------------------------
+
+## 3. Number of Subarrays of Size K with Average ≥ Threshold (LC 1343)
+
+Input:
+arr = [2,2,2,2,5,5,5,8]
+k = 3
+threshold = 4
+
+Output:
+3
+
+Store:
+- windowSum
+- count
+
+Key Idea:
+Instead of checking:
+
+average >= threshold
+
+Check:
+
+windowSum >= threshold * k
+
+------------------------------------------------------------
+
+## 4. Permutation in String (LC 567)
+
+Input:
+s1 = "ab"
+s2 = "eidbaooo"
+
+Output:
+true
+
+Store:
+- s1Hash[26]
+- windowHash[26]
+
+Key Idea:
+- Build frequency of s1
+- Build first window frequency
+- Compare
+- Slide window
+- Remove outgoing character
+- Add incoming character
+- Compare again
+
+------------------------------------------------------------
+
+## 5. Longest Substring Without Repeating Characters (LC 3)
+
+Input:
+"abcabcbb"
+
+Output:
+3
+
+Store:
+unordered_set<char>
+
+Key Idea:
+- Expand right
+- If duplicate appears
+    - Remove left until valid
+- Update maximum length
+
+------------------------------------------------------------
+
+## 6. Fruit Into Baskets (LC 904)
+
+Input:
+[1,2,1,2,3,2,2]
+
+Output:
+4
+
+Store:
+unordered_map<int,int>
+
+fruit -> frequency
+
+Key Idea:
+- Expand right
+- More than 2 fruit types?
+    - Shrink left
+    - Decrease frequency
+    - If frequency becomes 0
+        erase from map
+- Update maximum length
+
+============================================================
+
+# Fixed Sliding Window Template
+
+1. Build first window.
+
+2. Process first window.
+
+3. Slide:
+
+window = window - outgoing + incoming
+
+4. Update answer.
+
+TC: O(n)
+SC: O(1) or O(26)
+
+============================================================
+
+# Variable Sliding Window Template
+
+left = 0
+
+for(right = 0; right < n; right++){
+
+    Expand window
+
+    while(window becomes invalid){
+
+        Remove left element
+
+        left++
+
+    }
+
+    Update answer
+}
+
+TC: O(n)
+SC: Depends on data structure
+
+============================================================
+
+# Sliding Window Recognition
+
+Use Fixed Sliding Window when:
+
+- Window size = k
+- Size of another string
+- Maximum sum of size k
+- Average of size k
+- Count windows of size k
+
+Use Variable Sliding Window when:
+
+- Longest...
+- Smallest...
+- At most K distinct
+- No duplicate characters
+- Minimum window
+- Expand until invalid
+- Shrink until valid
+
+============================================================
+
+# Pattern Comparison
+
+| Problem | Store | Why |
+|---------|-------|-----|
+| Maximum Sum | windowSum | Find maximum sum |
+| Maximum Average | windowSum | Divide by k at end |
+| Threshold | windowSum | Compare with target |
+| Permutation | Character Frequency | Compare two windows |
+| Longest Unique Substring | Character Set | Detect duplicates |
+| Fruit Into Baskets | Fruit → Frequency | Count distinct fruit types |
+
+============================================================
+
+# Golden Rule
+
+Fixed Window
+
+Build First Window
+↓
+Slide
+↓
+Remove One
+↓
+Add One
+↓
+Update Answer
+
+------------------------------------------------------------
+
+Variable Window
+
+Expand Right
+↓
+Window Invalid?
+↓
+Shrink Left Until Valid
+↓
+Update Answer
+↓
+Repeat 
+
+
+
+
+
+ 
+
+
+
+
+ 
+
+
+
+# Sliding Window Revision Questions
+
+Solve these mentally whenever you have free time.
+
+Don't code.
+
+Just identify:
+
+- Pattern
+- What to Store
+- Window Valid Condition
+- Expand?
+- Shrink?
+- Return?
+
+---------------------------------------------------------
+
+# Fixed Sliding Window
+
+643. Maximum Average Subarray I
+
+Idea:
+Find the maximum average of a window of size k.
+
+Store:
+Window Sum
+
+Window:
+Fixed
+
+Return:
+Maximum Average
+
+---------------------------------------------------------
+
+1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
+
+Idea:
+Count how many windows satisfy average >= threshold.
+
+Store:
+Window Sum
+
+Window:
+Fixed
+
+Return:
+Count
+
+---------------------------------------------------------
+
+567. Permutation in String
+
+Idea:
+Check whether s2 contains any permutation of s1.
+
+Store:
+Need Frequency
+Window Frequency
+
+Window:
+Fixed
+
+Return:
+True / False
+
+---------------------------------------------------------
+
+# Variable Sliding Window
+
+3. Longest Substring Without Repeating Characters
+
+Idea:
+Longest substring with unique characters.
+
+Store:
+Character Set
+
+Valid:
+No duplicates
+
+Return:
+Maximum Length
+
+---------------------------------------------------------
+
+904. Fruit Into Baskets
+
+Idea:
+Longest window containing at most two fruit types.
+
+Store:
+Fruit -> Frequency
+
+Valid:
+Distinct Fruits <= 2
+
+Return:
+Maximum Length
+
+---------------------------------------------------------
+
+209. Minimum Size Subarray Sum
+
+Idea:
+Smallest window whose sum >= target.
+
+Store:
+Window Sum
+
+Valid:
+Sum >= Target
+
+Return:
+Minimum Length
+
+---------------------------------------------------------
+
+76. Minimum Window Substring
+
+Idea:
+Smallest substring containing every character of target.
+
+Store:
+Need Frequency
+Window Frequency
+
+Valid:
+formed == required
+
+Return:
+Substring
+
+---------------------------------------------------------
+
+424. Longest Repeating Character Replacement
+
+Idea:
+Replace at most k characters to make all characters same.
+
+Store:
+Character Frequency
+
+Valid:
+Window Size - Max Frequency <= k
+
+Return:
+Maximum Length
+
+---------------------------------------------------------
+
+1004. Max Consecutive Ones III
+
+Idea:
+Flip at most k zeros.
+
+Store:
+Zero Count
+
+Valid:
+Zero Count <= k
+
+Return:
+Maximum Length
+
+---------------------------------------------------------
+
+1493. Longest Subarray of 1's After Deleting One Element
+
+Idea:
+Delete exactly one element.
+
+Store:
+Zero Count
+
+Valid:
+Zero Count <= 1
+
+Return:
+Maximum Length
+
+---------------------------------------------------------
+
+930. Binary Subarrays With Sum
+
+Idea:
+Count subarrays having given binary sum.
+
+Pattern:
+Sliding Window + Prefix Sum Thinking
+
+---------------------------------------------------------
+
+992. Subarrays with K Different Integers
+
+Idea:
+Count subarrays with exactly K distinct integers.
+
+Store:
+Frequency Map
+
+Valid:
+Distinct <= K
+
+Interview Trick:
+Exactly(K) = AtMost(K) - AtMost(K-1)
+
+---------------------------------------------------------
+
+# Master Template
+
+Expand Right
+
+↓
+
+Update Data Structure
+
+↓
+
+Window Valid?
+
+↓
+
+YES
+
+↓
+
+Update Answer
+
+↓
+
+Shrink Left
+
+↓
+
+Still Valid?
+
+↓
+
+YES → Continue Shrinking
+
+↓
+
+NO
+
+↓
+
+Expand Again
